@@ -9,6 +9,9 @@ Briefly describe what this Java console application does. Mention its purpose an
 List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
 
 - As a customer, I want to see a menu with options when I stary the app, so that I can navigate to different pages of the store.
+- As a customer, I want to see what the store is selling, so that I can add the items I want to the cart.
+- As a customer, I want to be able to view the items I put into the shopping cart, so that I know what I added and how much I will be spending before I check out.
+- As a customer, I want to be able to pay for my items in cash, so that I can complete my purchase and get a receipt.
 
 ## Setup
 
