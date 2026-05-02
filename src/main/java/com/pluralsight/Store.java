@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,6 +60,27 @@ public class Store {
     public static void loadInventory(String fileName, ArrayList<Product> inventory) {
         // TODO: read each line, split on "|",
         //       create a Product object, and add it to the inventory list
+        File file = new File(fileName);
+
+        if (!file.exists()) {
+            System.out.println("File " + fileName + " Not Found");
+            return;
+           }
+            //read the file
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split("\\|");
+                String productId = (data[0]);
+                String productName = data[1];
+                double price = Double.parseDouble(data[2]);
+
+                Product product = new Product(productId, productName, price);
+                inventory.add(product);
+            }
+        }catch (Exception e) {
+            System.out.println("Error opening file!" + e.getMessage());
+        }
     }
 
     /**
@@ -68,6 +92,7 @@ public class Store {
                                        Scanner scanner) {
         // TODO: show each product (id, name, price),
         //       prompt for an id, find that product, add to cart
+        System.out.println();
     }
 
     /**
@@ -106,4 +131,3 @@ public class Store {
     }
 }
 
- 
