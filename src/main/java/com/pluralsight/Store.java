@@ -6,13 +6,17 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Starter code for the Online Store workshop.
- * Students will complete the TODO sections to make the program work.
- */
 public class Store {
+    private static final String RESET = "\u001B[0m";
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String BLUE = "\u001B[34m";
+    private static final String PURPLE = "\u001B[35m";
+
 
     public static void main(String[] args) {
+        displayStoreName();
 
         // Create lists for inventory and the shopping cart
         ArrayList<Product> inventory = new ArrayList<>();
@@ -25,14 +29,14 @@ public class Store {
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
         while (choice != 3) {
-            System.out.println("\nWelcome to the Online Store!");
-            System.out.println("1. Show Products");
+            System.out.println("\nWelcome to " + RED + "One-Stop Shop" + RESET + "!");
+            System.out.println(YELLOW + "1. Show Products");
             System.out.println("2. Show Cart");
-            System.out.println("3. Exit");
-            System.out.print("Your choice: ");
+            System.out.println("3. Exit" + RESET);
+            System.out.print(BLUE + "Your choice: " + RESET);
 
             if (!scanner.hasNextInt()) {
-                System.out.println("Please enter 1, 2, or 3.");
+                System.out.println(RED + "Please enter 1, 2, or 3." + RESET);
                 scanner.nextLine();                 // discard bad input
                 continue;
             }
@@ -42,8 +46,8 @@ public class Store {
             switch (choice) {
                 case 1 -> displayProducts(inventory, cart, scanner);
                 case 2 -> displayCart(cart, scanner);
-                case 3 -> System.out.println("Thank you for shopping with us!");
-                default -> System.out.println("Invalid choice!");
+                case 3 -> System.out.println(GREEN + "Thank you for shopping with us!" + RESET);
+                default -> System.out.println(RED + "Invalid choice!" + RESET);
             }
         }
         scanner.close();
@@ -58,12 +62,13 @@ public class Store {
      * A17|Wireless Mouse|19.99
      */
     public static void loadInventory(String fileName, ArrayList<Product> inventory) {
-        // TODO: read each line, split on "|",
-        //       create a Product object, and add it to the inventory list
+        //connects to the file
         File file = new File(fileName);
 
+        //check if file exist
         if (!file.exists()) {
-            System.out.println("File " + fileName + " Not Found");
+            System.out.println(RED + "File " + fileName + " Not Found" + RESET);
+            //exits here and lets user know file was not fund right away so it doesn't have to go through the try catch
             return;
            }
             //read the file
@@ -71,7 +76,7 @@ public class Store {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split("\\|");
-                String productId = (data[0]);
+                String productId = data[0];
                 String productName = data[1];
                 double price = Double.parseDouble(data[2]);
 
@@ -79,7 +84,7 @@ public class Store {
                 inventory.add(product);
             }
         }catch (Exception e) {
-            System.out.println("Error opening file!" + e.getMessage());
+            System.out.println(RED + "Error opening file! " + RESET + e.getMessage());
         }
     }
 
@@ -87,12 +92,39 @@ public class Store {
      * Displays all products and lets the user add one to the cart.
      * Typing X returns to the main menu.
      */
-    public static void displayProducts(ArrayList<Product> inventory,
-                                       ArrayList<Product> cart,
-                                       Scanner scanner) {
-        // TODO: show each product (id, name, price),
-        //       prompt for an id, find that product, add to cart
-        System.out.println();
+    public static void displayProducts(ArrayList<Product> inventory, ArrayList<Product> cart, Scanner scanner) {
+
+        for (Product product : inventory) {
+            String formatted = String.format(PURPLE + "%s|%s|$%.2f" + RESET, product.getProductId(), product.getProductName(), product.getProductPrice());
+            System.out.println(formatted);
+        }
+
+        String productId;
+        boolean running = true;
+
+        while (running) {
+            //reset for new input
+            boolean found = false;
+            System.out.println("\nAdd Product to cart");
+            System.out.print(BLUE + "Enter product ID or enter (X) for main menu: " + RESET);
+            productId = scanner.nextLine();
+
+            if (productId.equalsIgnoreCase("X")) {
+                    running = false;
+            }
+
+            for (Product product : inventory) {
+                if (product.getProductId().equalsIgnoreCase(productId)) {
+                    System.out.println(GREEN + "Item added to cart!" + RESET);
+                    cart.add(product);
+                    found = true;
+                }
+            }
+            //show if nothing matched and the input isn't "X"
+            if  (!found && !productId.equalsIgnoreCase("X")) {
+                System.out.println(RED + "Product not found!"  + RESET);
+            }
+        }
     }
 
     /**
@@ -128,6 +160,22 @@ public class Store {
     public static Product findProductById(String id, ArrayList<Product> inventory) {
         // TODO: loop over the list and compare ids
         return null;
+    }
+
+    private static void displayStoreName() {
+        String storeName ="""
+                 ________  ________   _______                  ________  _________  ________  ________        ________  ___  ___  ________  ________  \s
+                |\\   __  \\|\\   ___  \\|\\  ___ \\                |\\   ____\\|\\___   ___\\\\   __  \\|\\   __  \\      |\\   ____\\|\\  \\|\\  \\|\\   __  \\|\\   __  \\ \s
+                \\ \\  \\|\\  \\ \\  \\\\ \\  \\ \\   __/|   ____________\\ \\  \\___|\\|___ \\  \\_\\ \\  \\|\\  \\ \\  \\|\\  \\     \\ \\  \\___|\\ \\  \\\\\\  \\ \\  \\|\\  \\ \\  \\|\\  \\\s
+                 \\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\_|/__|\\____________\\ \\_____  \\   \\ \\  \\ \\ \\  \\\\\\  \\ \\   ____\\     \\ \\_____  \\ \\   __  \\ \\  \\\\\\  \\ \\   ____\\
+                  \\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\_|\\ \\|____________|\\|____|\\  \\   \\ \\  \\ \\ \\  \\\\\\  \\ \\  \\___|      \\|____|\\  \\ \\  \\ \\  \\ \\  \\\\\\  \\ \\  \\___|
+                   \\ \\_______\\ \\__\\\\ \\__\\ \\_______\\               ____\\_\\  \\   \\ \\__\\ \\ \\_______\\ \\__\\           ____\\_\\  \\ \\__\\ \\__\\ \\_______\\ \\__\\  \s
+                    \\|_______|\\|__| \\|__|\\|_______|              |\\_________\\   \\|__|  \\|_______|\\|__|          |\\_________\\|__|\\|__|\\|_______|\\|__|  \s
+                                                                 \\|_________|                                   \\|_________|                          \s
+                """;
+        String red = "\u001B[31m";
+        String reset = "\u001B[0m";
+        System.out.println(red + storeName + reset);
     }
 }
 
