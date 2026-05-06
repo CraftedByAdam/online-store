@@ -175,7 +175,29 @@ public class Store {
      * 4. Clear the cart.
      */
     public static void checkOut(ArrayList<Product> cart, double totalAmount, Scanner scanner) {
-        // TODO: loop over the list and compare ids
+        double changeAmount;
+        double userInput;
+
+        boolean running = true;
+        while (running) {
+            System.out.println("Total Cost: " + totalAmount);
+            System.out.print(BLUE + "Enter Payment: " + RESET);
+            userInput = scanner.nextDouble();
+
+            if (userInput == totalAmount) {
+                cart.clear();
+                System.out.println(GREEN + "\nThank you for shopping with us!" + RESET);
+                running = false;
+            } else if (userInput > totalAmount) {
+                cart.clear();
+                changeAmount  = userInput - totalAmount;
+                String formattedChangeAmount = String.format("$%.2f", changeAmount);
+                System.out.println("Thank you for  shopping with us! Here is your change " + RED + formattedChangeAmount + RESET);
+                running = false;
+            }else if (userInput < totalAmount) {
+                System.out.println(RED + "Insufficient Payment! Please try again." + RESET);
+            }
+        }
     }
 
     /**
