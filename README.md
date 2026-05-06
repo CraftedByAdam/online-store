@@ -1,12 +1,12 @@
-# Project Title
+# One-Stop Shop
 
-## Description of the Project
+## Description of One-Stop Shop
 
-Briefly describe what this Java console application does. Mention its purpose and who the intended users are. Explain the main functionality and what problems it aims to solve.
+This app allows a user to browse a list of products and the user can add the products to the cart by entering the ID of the product.
+The user can view the items they have in the cart, and it will show them the amount of each item as well as the total amount.
+The User can pay for them item by entering in a payment and would revive change back if what they gave was more than total amount.
 
 ## User Stories
-
-List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
 
 - As a customer, I want to see a menu with options when I stary the app, so that I can navigate to different pages of the store.
 - As a customer, I want to see what the store is selling, so that I can add the items I want to the cart.
@@ -15,7 +15,10 @@ List the user stories that guided the development of your application. Format th
 
 ## Setup
 
-Instructions on how to set up and run the project using IntelliJ IDEA.
+1. Open IntelliJ IDEA.
+2. Open the online-store app project
+3. Locate the Store.java file
+4. Right-click the file and select Run 'FinancialTracker.main()'
 
 ### Prerequisites
 
@@ -34,38 +37,29 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java: Mention the version you are using.
-- Any additional libraries or frameworks used in the project.
+- Version Java 17.
+- Git/GitHub: Used for version control and proect tracking.
 
 ## Demo
 
-Include screenshots or GIFs that show your application in action. Use tools like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
-
-![Application Screenshot](path/to/your/screenshot.png)
+![Application Screenshot](One-Stop-Shop-Demo.gif)
 
 ## Future Work
 
-Outline potential future enhancements or functionalities you might consider adding:
-
-- Additional feature to be developed.
-- Improvement of current functionalities.
+- I would like to add a way for the user to be able to remove items from the cart.
 
 ## Resources
 
 List resources such as tutorials, articles, or documentation that helped you during the project.
 
-- [Java Programming Tutorial](https://www.example.com)
-- [Effective Java](https://www.example.com)
+- [Java Visual Learning Hub by Raymond Maroun](https://raymaroun.github.io/yearup-java-visuals/)
 
 ## Team Members
 
-- **Name 1** - Specific contributions or roles.
-- **Name 2** - Specific contributions or roles.
+- **Adam Korabi**
 
 ## Thanks
 
-Express gratitude towards those who provided help, guidance, or resources:
-
-- Thank you to [Mentor's Name] for continuous support and guidance.
+- Thank you to Raymond Maroun for continuous support and guidance.
 - A special thanks to all teammates for their dedication and teamwork.
  
