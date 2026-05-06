@@ -62,7 +62,6 @@ public class Store {
      * A17|Wireless Mouse|19.99
      */
     public static void loadInventory(String fileName, ArrayList<Product> inventory) {
-        //connects to the file
         File file = new File(fileName);
 
         //check if file exist
@@ -137,6 +136,35 @@ public class Store {
         //   • compute the total cost
         //   • ask the user whether to check out (C) or return (X)
         //   • if C, call checkOut(cart, totalAmount, scanner)
+        double totalAmount = 0.0;
+
+        if (cart.isEmpty()) {
+            System.out.println(RED + "\nNo items in Cart" + RESET);
+            return;
+        }
+        System.out.println(BLUE + "\nItems in Cart" + RESET);
+        for (Product product : cart) {
+            System.out.println(PURPLE + product.getProductName() + RESET+ RED + " - " + product.getProductPrice() + RESET);
+
+            totalAmount += product.getProductPrice();
+        }
+        String formattedTotalAmount = String.format("$%.2f", totalAmount);
+        System.out.println(GREEN + "Total Cost: " + formattedTotalAmount + RESET + "\n");
+
+        boolean running = true;
+        String userInput;
+        while (running) {
+            System.out.print(BLUE + "To check out enter(C) or (X)for main menu: " + RESET );
+            userInput = scanner.nextLine();
+
+            if (userInput.equalsIgnoreCase("X")) {
+                running = false;
+            }
+            if (userInput.equalsIgnoreCase("C")) {
+                checkOut(cart, totalAmount, scanner);
+                running = false;
+            }
+        }
     }
 
     /**
@@ -146,10 +174,8 @@ public class Store {
      * 3. Display a simple receipt.
      * 4. Clear the cart.
      */
-    public static void checkOut(ArrayList<Product> cart,
-                                double totalAmount,
-                                Scanner scanner) {
-        // TODO: implement steps listed above
+    public static void checkOut(ArrayList<Product> cart, double totalAmount, Scanner scanner) {
+        // TODO: loop over the list and compare ids
     }
 
     /**
