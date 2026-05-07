@@ -133,11 +133,7 @@ public class Store {
      * and offers the option to check out.
      */
     public static void displayCart(ArrayList<Product> cart, Scanner scanner) {
-        // TODO:
-        //   • list each product in the cart
-        //   • compute the total cost
-        //   • ask the user whether to check out (C) or return (X)
-        //   • if C, call checkOut(cart, totalAmount, scanner)
+
         double totalAmount = 0.0;
 
         if (cart.isEmpty()) {
@@ -208,7 +204,7 @@ public class Store {
      * @return the matching Product, or null if not found
      */
     public static Product findProductById(String id, ArrayList<Product> inventory) {
-        // TODO: loop over the list and compare ids
+
         for (Product product : inventory) {
             if (product.getProductId().equalsIgnoreCase(id)) {
                 System.out.println(GREEN + "Item added to cart!" + RESET);
