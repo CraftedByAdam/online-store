@@ -112,13 +112,15 @@ public class Store {
                     running = false;
             }
 
-            for (Product product : inventory) {
-                if (product.getProductId().equalsIgnoreCase(productId)) {
-                    System.out.println(GREEN + "Item added to cart!" + RESET);
-                    cart.add(product);
-                    found = true;
-                }
+            //find the product
+            Product product = findProductById(productId,  inventory);
+
+            //if found add it to cart
+            if (product != null) {
+                cart.add(product);
+                found = true;
             }
+
             //show if nothing matched and the input isn't "X"
             if  (!found && !productId.equalsIgnoreCase("X")) {
                 System.out.println(RED + "Product not found!"  + RESET);
@@ -207,6 +209,12 @@ public class Store {
      */
     public static Product findProductById(String id, ArrayList<Product> inventory) {
         // TODO: loop over the list and compare ids
+        for (Product product : inventory) {
+            if (product.getProductId().equalsIgnoreCase(id)) {
+                System.out.println(GREEN + "Item added to cart!" + RESET);
+                return product;
+            }
+        }
         return null;
     }
 
